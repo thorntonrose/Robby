@@ -1,4 +1,4 @@
-# Robby
+# Robby the Chatbot
 
 Robby is a chatbot for Slack.
 
@@ -11,6 +11,10 @@ Robby is a chatbot for Slack.
 To run: `python robby.py`
 
 To chat: Login to mstv.slack.com and send direct messages to @robby. For a list of commands, say anything.
+
+## Logging
+
+Robby logs to robby.log in the current directory. Logging is configured via logging.ini.
 
 ## See Also
 

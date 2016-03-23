@@ -4,29 +4,57 @@ import requests
 from slackbot.bot import respond_to
 from slackbot.bot import listen_to
 
-JENKINS_URL = "http://10.116.0.10:8080"
+BASE_URL = "http://10.116.0.10:8080"
+
+JOB_STATUSES = { 
+    "blue": "Success", "blue_anime": "Running", 
+    "yellow": "Unstable", "yellow_anime": "Running", 
+    "red": "Failed", "red_anime": "Running"
+}
+
 log = logging.getLogger(__name__)
 
-@respond_to('jenkins run (.*)', re.IGNORECASE)
+def get_job_url(job):
+   return "{}/job/{}".format(BASE_URL, job)
+
+def reply_error(message, method, url, resp):
+    message.reply("I got '{} {}' for '{} {}'.".format(resp.status_code, resp.reason, method, url))
+
+@respond_to("jenkins run (.*)", re.IGNORECASE)
 def jenkins_run(message, job):
     log.info("jenkins_run ...")
     params = "token=TOKEN"
-    url = "{}/job/{}/build?{}".format(JENKINS_URL, job, params)
-    log.info("jenkins_run: url: {}".format(url))
-    resp = requests.post(url)
+    job_url = get_job_url(job)
+    build_url = "{}/build?{}".format(job_url, params)
+    log.info("jenkins_run: build_url: {}".format(build_url))
+    resp = requests.post(build_url)
     log.info("jenkins_run: status_code: {}".format(resp.status_code))
 
-    if (resp.status_code == 404):
-        message.reply("Job {} not found at {}.".format(JENKINS_URL))
-        return
-
     if (resp.status_code == 400):
-        url = "{}/job/{}/buildWithParameters?{}".format(JENKINS_URL, job, params)
-        log.info("jenkins_run: url: {}".format(url))
-        resp = requests.post(url)
+        build_url = "{}/buildWithParameters?{}".format(job_url, params)
+        log.info("jenkins_run: build_url: {}".format(build_url))
+        resp = requests.post(build_url)
         log.info("jenkins_run: status_code: {}".format(resp.status_code))
 
     if (resp.status_code == 201):
-        message.reply("Job {} queued. Check Slack or {}/job/{} for results.".format(job, JENKINS_URL, job))
+        message.reply("I started {}. Check Slack or {} for results.".format(job, job_url))
     else:
-        message.reply("Job {} not queued: {}, {}".format(resp.status_code, resp.text))
+        reply_error(message, "POST", build_url, resp)
+
+@respond_to("jenkins status (.*)", re.IGNORECASE)
+def jenkins_status(message, job):
+    log.info("jenkins_status ...")
+    job_url = get_job_url(job)
+    status_url = "{}/api/json".format(job_url)
+    log.info("jenkins_status: status_url: {}".format(status_url))
+    resp = requests.get(status_url)
+
+    if (resp.status_code == 200):
+       job_data = resp.json()
+       color = job_data["color"]
+       last_build_url = job_data["lastBuild"]["url"]
+       log.info("jenkins_status: color: {}, last_build_url: {}".format(color, last_build_url))
+       message.reply("The status of {} is '{}'. Check {} for information on the last build.".format( \
+           job, JOB_STATUSES[color], last_build_url))
+    else:
+        reply_error(message, "GET", status_url, resp)

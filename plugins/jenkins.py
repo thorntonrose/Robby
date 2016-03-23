@@ -6,7 +6,7 @@ from slackbot.bot import listen_to
 
 BASE_URL = "http://10.116.0.10:8080"
 
-JOB_STATUSES = { 
+JOB_checkES = { 
     "blue": "Success", "blue_anime": "Running", 
     "yellow": "Unstable", "yellow_anime": "Running", 
     "red": "Failed", "red_anime": "Running"
@@ -41,20 +41,20 @@ def jenkins_run(message, job):
     else:
         reply_error(message, "POST", build_url, resp)
 
-@respond_to("jenkins status (.*)", re.IGNORECASE)
-def jenkins_status(message, job):
-    log.info("jenkins_status ...")
+@respond_to("jenkins check (.*)", re.IGNORECASE)
+def jenkins_check(message, job):
+    log.info("jenkins_check ...")
     job_url = get_job_url(job)
     status_url = "{}/api/json".format(job_url)
-    log.info("jenkins_status: status_url: {}".format(status_url))
+    log.info("jenkins_check: status_url: {}".format(status_url))
     resp = requests.get(status_url)
 
     if (resp.status_code == 200):
        job_data = resp.json()
        color = job_data["color"]
        last_build_url = job_data["lastBuild"]["url"]
-       log.info("jenkins_status: color: {}, last_build_url: {}".format(color, last_build_url))
+       log.info("jenkins_check: color: {}, last_build_url: {}".format(color, last_build_url))
        message.reply("The status of {} is '{}'. Check {} for information on the last build.".format( \
-           job, JOB_STATUSES[color], last_build_url))
+           job, JOB_checkES[color], last_build_url))
     else:
         reply_error(message, "GET", status_url, resp)

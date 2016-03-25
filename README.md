@@ -10,7 +10,7 @@ Robby is a chatbot for Slack.
 
 ### Run
 
-`./robby run <mode>`
+`python robby.py <mode>`
 
 Mode:
 

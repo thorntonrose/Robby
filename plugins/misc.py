@@ -13,7 +13,8 @@ COMMANDS = [
     "`jenkins check <job>` -- Get status and URL of a Jenkins job.",
     "`jenkins run <job> [<parameter>=<value> ...]` -- Run a Jenkins job.",
     "`jenkins stop <job>` -- Stop a Jenkins job.",
-    "`update self` -- Download code updates and restart.",
+    "`sign out` -- Go offline.",
+    "`update self` -- Download updates and restart.",
     "`version` -- Show version."
 ]
 
@@ -27,8 +28,13 @@ def help(message):
 @respond_to("update self")
 def update(message):
     log.debug("update ...")
-    message.reply("I'll be back. (Yeah, I know. Wrong movie. :-P)")
+    message.reply("I'll be back. (Yeah, I know. Wrong movie. :stuck_out_tongue:)")
     plugins.jenkins.run_job(message, "robby-update", "MODE=" + slackbot_settings.mode)
+
+@respond_to("sign out")
+    log.debug("sign out ...")
+    message.reply("bye")
+    plugins.jenkins.run_job(message, "robby-stop", "MODE=" + slackbot_settings.mode)
 
 @respond_to("version")
 def version(message):

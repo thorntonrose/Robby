@@ -8,14 +8,24 @@ Robby is a chatbot for Slack.
 
 ## Usage
 
-To run: 
+### Run
 
-`python robby.py dev|prod`
+`./robby run <mode>`
 
-dev = Connect to Slack as @robby-dev
-prod = Connect to Slack as @robby
+Mode:
 
-To chat:
+* dev = Connect to Slack as @robby-dev
+* prod = Connect to Slack as @robby
+
+### Start Daemon
+
+`./robby start <mode>`
+
+### Stop Daemon
+
+`./robby stop <mode>`
+
+### Chat
 
 Login to mstv.slack.com and send direct messages to @robby. For a list of commands, say anything.
 

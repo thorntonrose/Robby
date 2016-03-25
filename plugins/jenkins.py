@@ -144,7 +144,3 @@ def stop_job(message, job):
         if resp:
             message.reply("{}: interrupted, {}\n(It will take a few seconds for the job to stop.)".format( \
                 job, get_job_url(job)))
-
-# jenkins run <name> tests
-# jenkins run <name> tests <mdms-ip>
-# jenkins run <name> tests <mdms-ip> <dns-ip>

@@ -22,3 +22,15 @@ Robby logs to robby.log in the current directory. Logging is configured via logg
 * [Slackbot](https://github.com/lins05/slackbot)
 * [Slack Bot Users](https://api.slack.com/bot-users)
 * [Robby the Robot](https://en.wikipedia.org/wiki/Robby_the_Robot)
+
+## Ideas for Commands
+
+tests run <name> [branch=<branch>] [mdms=<mdms-ip>] [dns=<dns-ip>]
+
+tests check [<name>] [branch=<branch>]
+
+v1 show <id>
+
+v1 show my work
+
+v1 show burndown <team>

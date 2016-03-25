@@ -19,4 +19,4 @@ if __name__ == "__main__":
         from slackbot.bot import Bot
         Bot().run()
     else:
-       print("Usage: python robby.py dev|prod")
+       print("Usage: python robby.py {dev|prod}")

@@ -27,7 +27,8 @@ def help(message):
 @respond_to("update self")
 def update(message):
     log.debug("update ...")
-    jenkins.run_job(message, "robby-update", "MODE=" + slackbot_settings.mode)
+    message.reply("I'll be back. (Yeah, I know. Wrong movie. :-P)")
+    plugins.jenkins.run_job(message, "robby-update", "MODE=" + slackbot_settings.mode)
 
 @respond_to("version")
 def version(message):

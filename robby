@@ -21,11 +21,9 @@ case "$cmd" in
 
     stop)
         pid=$(ps -ef | grep "robby.py $mode" | grep -v grep | awk '{ print $2 }')
-        [ "$pid" != "" ] && kill $pid
+        if [ "$pid" != "" ]; then kill $pid; fi
         ;;
 
     *)
         echo "$usage"
 esac
-
-exit 0

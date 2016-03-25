@@ -32,6 +32,7 @@ def update(message):
     plugins.jenkins.run_job(message, "robby-update", "MODE=" + slackbot_settings.mode)
 
 @respond_to("sign out")
+def sign_out(message):
     log.debug("sign out ...")
     message.reply("bye")
     plugins.jenkins.run_job(message, "robby-stop", "MODE=" + slackbot_settings.mode)

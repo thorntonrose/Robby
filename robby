@@ -1,6 +1,6 @@
 #!/bin/bash
 
-usage="Usage: robby {run|start|stop} <mode>"
+usage="Usage: robby {start|stop} <mode>"
 
 if [ $# -lt 2 ]; then
     echo "$usage"
@@ -11,10 +11,6 @@ cmd=$1
 mode=$2
 
 case "$cmd" in
-    run)
-        python robby.py $mode
-        ;;
-
     start)
         python robby.py $mode >start.log 2&>1 &
         ;;

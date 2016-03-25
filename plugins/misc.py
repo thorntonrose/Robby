@@ -22,7 +22,7 @@ COMMANDS = [
 @respond_to("help")
 def help(message):
     log.debug("help ...")
-    message.reply("Commands:\n{}".format("\n".join(COMMANDS)))
+    message.reply("\n".join(COMMANDS))
 
 @respond_to("update self")
 def update(message):

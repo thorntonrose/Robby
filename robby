@@ -4,7 +4,7 @@ usage="Usage: robby {run|start|stop} <mode>"
 
 if [ $# -lt 2 ]; then
     echo "$usage"
-    exit
+    exit 1
 fi
 
 cmd=$1
@@ -20,10 +20,12 @@ case "$cmd" in
         ;;
 
     stop)
-        pid=$(ps -ef | grep "robby.py $mode" | grep -v grep | awk '{ print $2 }'; exit 0)
+        pid=$(ps -ef | grep "robby.py $mode" | grep -v grep | awk '{ print $2 }')
         [ "$pid" != "" ] && kill $pid
         ;;
 
     *)
         echo "$usage"
 esac
+
+exit 0

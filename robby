@@ -20,7 +20,7 @@ case "$cmd" in
         ;;
 
     stop)
-        pid=$(ps -ef | grep "robby.py $mode" | grep -v grep | awk '{ print $2 }')
+        pid=$(ps -ef | grep "robby.py $mode" | grep -v grep | awk '{ print $2 }'; exit 0)
         [ "$pid" != "" ] && kill $pid
         ;;
 

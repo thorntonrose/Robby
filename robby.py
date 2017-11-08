@@ -4,8 +4,8 @@ import slackbot_settings
 import sys
 
 API_TOKENS = {
-    "dev": "xoxb-29607464273-JnZEKKKAyw8vosrqzH8mz0Vr",
-    "prod": "xoxb-28564340176-YquxkvJJTXwJhCqUlHhD65ly"
+    "dev": "",
+    "prod": ""
 }
 
 if __name__ == "__main__":

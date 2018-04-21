@@ -25,9 +25,9 @@ Mode:
 
 `./robby stop <mode>`
 
-### Chat
+### Usage
 
-Login to mstv.slack.com and send direct messages to @robby. For a list of commands, say anything.
+Send direct messages to @robby. For a list of commands, send anything.
 
 ## Logging
 
@@ -35,14 +35,13 @@ Robby logs to robby.log in the current directory. Logging is configured via logg
 
 ## See Also
 
-* [Robby's Configuration on Slack](https://mstv.slack.com/services/B0UGM757B)
 * [Slackbot](https://github.com/lins05/slackbot)
 * [Slack Bot Users](https://api.slack.com/bot-users)
 * [Robby the Robot](https://en.wikipedia.org/wiki/Robby_the_Robot)
 
 ## Ideas for Commands
 
-tests run <name> [branch=<branch>] [mdms=<mdms-ip>] [dns=<dns-ip>]
+tests run <name> [branch=<branch>] [host=<ip>] [dns=<ip>]
 
 tests check [<name>] [branch=<branch>]
 

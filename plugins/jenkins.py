@@ -7,12 +7,12 @@ from slackbot.bot import listen_to
 
 log = logging.getLogger(__name__)
 
-BASE_URL = "http://10.116.0.10:8080"
+BASE_URL = "http://<jenkins-host>:8080"
 
-STATUS_COLOR_NAMES = { 
+STATUS_COLOR_NAMES = {
     "red": "failed",
-    "yellow": "unstable", 
-    "blue": "success", 
+    "yellow": "unstable",
+    "blue": "success",
     "grey": "pending",
     "disabled": "disabled",
     "aborted": "aborted",
@@ -111,7 +111,7 @@ def run_job(message, job, args):
         else:
             query_string = ""
             build_url = "{}/build".format(job_url)
-        
+
         resp = post(message, build_url, [ 201 ])
 
         if resp:
